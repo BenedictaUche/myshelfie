@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
   return (
-    <header class="bg-white">
+    <header>
       <nav>
         <h1
           className="fw-bold"
