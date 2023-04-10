@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../Components/Header/Header";
 import { useNavigate, Link } from "react-router-dom";
-import { Container, Form, Button, Alert } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -48,11 +48,24 @@ const Signin = () => {
   };
 
   return (
-    <div style={{ backgroundColor: "#E9E2D0" }}>
+    <div
+      style={{ backgroundColor: "#E9E2D0", width: "100%", height: "100dvh" }}
+    >
       <Container>
         <Header />
-        <h1 className="text-center">Sign In</h1>
-        <Form onSubmit={handleSubmit} className="d-flex flex-column">
+        <h1
+          className="text-center"
+          style={{
+            fontStyle: "normal",
+            fontWeight: 600,
+            fontSize: "40px",
+            lineHeight: "63px",
+            fontFamily: "Montserrat, sans-serif",
+          }}
+        >
+          Sign In
+        </h1>
+        <Form onSubmit={handleSubmit} className="d-flex flex-column mt-5">
           <Form.Group class="mb-3">
             <Form.Label className="text-uppercase">Full Name</Form.Label>
             <Form.Control
@@ -62,12 +75,16 @@ const Signin = () => {
               value={formData.fullName}
               onChange={handleChange}
               isInvalid={errors.fullName !== ""}
+              style={{
+                boxShadow: "5px 4px 4px rgba(0, 0, 0, 0.25)",
+                borderRadius: "10px",
+              }}
             />
             <Form.Control.Feedback type="invalid">
               {errors.fullName}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group class="mb-3">
+          <Form.Group class="mb-4">
             <Form.Label className="text-uppercase">Password</Form.Label>
             <Form.Control
               type="password"
@@ -76,12 +93,26 @@ const Signin = () => {
               value={formData.password}
               onChange={handleChange}
               isInvalid={errors.password !== ""}
+              style={{
+                boxShadow: "5px 4px 4px rgba(0, 0, 0, 0.25)",
+                borderRadius: "10px",
+              }}
             />
             <Form.Control.Feedback type="invalid">
               {errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-          <Button variant="primary" type="submit" className="text-capitalize">
+          <Button
+            type="submit"
+            className="text-capitalise loginbtn"
+            style={{
+              background: "#EA9085",
+              border: "none",
+              boxShadow: "5px 4px 4px rgba(0, 0, 0, 0.25)",
+              borderRadius: "4px",
+              fontSize: "20px",
+            }}
+          >
             Log In
           </Button>
           <Link to="/signup" className="mt-2">
@@ -89,7 +120,7 @@ const Signin = () => {
           </Link>
           <hr />
           <p className="text-center">Or log in with</p>
-          <Button variant="secondary" className="w-100 mb-2">
+          <Button variant="primary" className="w-100 mb-2">
             Google
           </Button>
         </Form>
