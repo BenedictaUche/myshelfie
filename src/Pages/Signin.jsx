@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
 import { useNavigate, Link } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
+import { GoogleButton } from "react-google-button";
+import { UserAuth } from "../context/AuthContext";
 
 const Signin = () => {
+  const { googleSignIn, user } = UserAuth();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -13,6 +25,12 @@ const Signin = () => {
     fullName: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (user != null) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   const handleClick = () => {
     navigate("/home");
@@ -120,9 +138,13 @@ const Signin = () => {
           </Link>
           <hr />
           <p className="text-center">Or log in with</p>
-          <Button variant="primary" className="w-100 mb-2">
+          <GoogleButton
+            onClick={handleGoogleSignIn}
+            className="w-100 mb-2 rounded"
+          />
+          {/* <Button variant="primary" className="w-100 mb-2">
             Google
-          </Button>
+          </Button> */}
         </Form>
       </Container>
     </div>
