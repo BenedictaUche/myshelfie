@@ -1,5 +1,7 @@
 import React from "react";
+import { Container, Modal, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Header from "../Components/Header/Header";
 import { UserAuth } from "../context/AuthContext";
 
 function Home() {
@@ -14,17 +16,33 @@ function Home() {
   };
 
   return (
-    <div>
-      <h1>Welcome to the Article Library</h1>
-      <p>Welcome, {user?.displayName}</p>
-      {user?.displayName ? (
-        <button onClick={handleSignOut}>Log out</button>
-      ) : (
-        <Link to="/signin">
-          <button>Login</button>
-        </Link>
-      )}
-    </div>
+    <>
+      <Container>
+        <Header />
+        <div className="d-flex mb-4 justify-content-end">
+          <p style={{ marginRight: "3%" }}>Welcome, {user?.displayName}</p>
+          {user?.displayName ? (
+            <button onClick={handleSignOut}>Log out</button>
+          ) : (
+            <Link to="/signin">
+              <button>Login</button>
+            </Link>
+          )}
+        </div>
+        <button
+          style={{
+            backgroundColor: "#6E5773",
+            border: "none",
+            padding: "10px",
+            color: "#fff",
+            float: "right",
+          }}
+        >
+          ADD ARTICLE URL
+        </button>
+        <hr />
+      </Container>
+    </>
   );
 }
 

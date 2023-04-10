@@ -6,8 +6,7 @@ import { GoogleButton } from "react-google-button";
 import { UserAuth } from "../context/AuthContext";
 
 const Signup = () => {
-  const { googleSignUp, user } = UserAuth();
-
+  const { handleGoogleSignUp, user } = UserAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,14 +20,6 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
-
-  const handleGoogleSignUp = async () => {
-    try {
-      await googleSignUp();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleClick = () => {
     navigate("/home");
@@ -185,7 +176,7 @@ const Signup = () => {
             Create Account
           </Button>
           <Link to="/signin" className="mt-2">
-            Already have an account? Sign in
+            Already have an account? Login
           </Link>
           <hr />
           <p className="text-center">Or sign up with</p>
