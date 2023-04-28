@@ -155,7 +155,7 @@ function Home() {
         </Modal>
         {/* End of modal */}
         {/* Display article */}
-        <div class="d-grid" style={{}}>
+        <div class="d-flex" style={{}}>
           {cards}
         </div>
 
