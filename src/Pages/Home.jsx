@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Modal, Button, Form, Card } from "react-bootstrap";
+import { Row, Col } from "react-grid-system";
 import { Link } from "react-router-dom";
 import Header from "../Components/Header/Header";
 import { UserAuth } from "../context/AuthContext";
 import axios from "axios";
-import { articles } from "../assets/data/data";
+// import { articles } from "../assets/data/data";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
@@ -44,6 +45,7 @@ function Home() {
 
       const newCard = (
         <Card
+          id={articleData.id}
           key={articleData.id}
           class="mt-5 rounded-top"
           style={{
@@ -62,16 +64,23 @@ function Home() {
             <h2 class="fs-6 w-8 mt-2 px-2">{articleData.title}</h2>
             <p class="fs-6 w-10 mt-3 px-2 pb-3">{articleData.description}</p>
           </div>
-          <div
-            className="icons mx-3 pr-3"
-            style={{
-              position: "absolute",
-              right: 0,
-              bottom: 0,
-            }}
-          >
-            <ShareOutlinedIcon style={{ pointer: "cursor" }} />
-            <FavoriteBorderOutlinedIcon style={{ pointer: "cursor" }} />
+          <div>
+            <div>
+              <Button onClick={() => handleDelete(articleData.id)}>
+                Delete
+              </Button>
+            </div>
+            <div
+              className="icons mx-3 pr-3"
+              style={{
+                position: "absolute",
+                right: 0,
+                bottom: 0,
+              }}
+            >
+              <ShareOutlinedIcon style={{ pointer: "cursor" }} />
+              <FavoriteBorderOutlinedIcon style={{ pointer: "cursor" }} />
+            </div>
           </div>
         </Card>
       );
@@ -81,6 +90,9 @@ function Home() {
       setError("Invalid URL or missing meta tags");
     }
     setIsLoading(false);
+  };
+  const handleDelete = (id) => {
+    setCards((prevCards) => prevCards.filter((card) => card.props.id !== id));
   };
 
   const { user, logOut } = UserAuth();
@@ -155,9 +167,13 @@ function Home() {
         </Modal>
         {/* End of modal */}
         {/* Display article */}
-        <div class="d-flex" style={{}}>
-          {cards}
-        </div>
+        <Row>
+          {cards.map((card) => (
+            <Col sm={4} key={card.key}>
+              {card}
+            </Col>
+          ))}
+        </Row>
 
         {/* End of display article */}
       </Container>
